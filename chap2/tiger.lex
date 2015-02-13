@@ -57,10 +57,20 @@ letter = [A-Za-z];
 <INITIAL>to  	=> (Tokens.TO(yypos,yypos+2));
 <INITIAL>function  	=> (Tokens.FUNCTION(yypos,yypos+8));
 
-
+<INITIAL>\" => (YYBEGIN STRING; continue()); 
+<STRING>\"  => (YYBEGIN INITIAL; continue()); 
+<STRING>[^\"]* => (Tokens.STRING(yytext, yypos, yypos+size(yytext))); 
 
 <INITIAL>{letter}({letter}|_|{digit})* => (Tokens.ID(yytext, yypos, yypos+size(yytext)));
 <INITIAL>{digit}+	=> (Tokens.INT(valOf (Int.fromString(yytext)),yypos,yypos+size(yytext)));
 <INITIAL>.       => (ErrorMsg.error yypos ("illegal character " ^ yytext); continue());
-<STRING>\" => (YYBEGIN STRING; continue()); 
+
+
+
+
+
+
+
+
+
 

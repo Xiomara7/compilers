@@ -1,1 +1,3 @@
-var i = "xiomara"
+type pos = string
+type line = pos
+var i : pos = "xiomara"
