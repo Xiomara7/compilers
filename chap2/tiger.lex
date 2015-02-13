@@ -10,6 +10,7 @@ fun eof() = let val pos = hd(!linePos) in Tokens.EOF(pos,pos) end
 
 %% 
 %s STRING; 
+%s COMMENT; 
 digit = [0-9];
 letter = [A-Za-z];
 %%
@@ -60,9 +61,12 @@ letter = [A-Za-z];
 <INITIAL>\" => (YYBEGIN STRING; continue()); 
 <STRING>\"  => (YYBEGIN INITIAL; continue()); 
 <STRING>[^\"]* => (Tokens.STRING(yytext, yypos, yypos+size(yytext))); 
-
 <INITIAL>{letter}({letter}|_|{digit})* => (Tokens.ID(yytext, yypos, yypos+size(yytext)));
 <INITIAL>{digit}+	=> (Tokens.INT(valOf (Int.fromString(yytext)),yypos,yypos+size(yytext)));
+<INITIAL>"/*" => (YYBEGIN COMMENT; continue()); 
+<COMMENT>"*/" => (YYBEGIN INITIAL; continue()); 
+<COMMENT>. => (continue()) ;
+<COMMENT>[^"*/"]. => (ErrorMsg.error yypos ("unclosed comments " ^ yytext); continue()); 
 <INITIAL>.       => (ErrorMsg.error yypos ("illegal character " ^ yytext); continue());
 
 

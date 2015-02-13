@@ -1,3 +1,5 @@
 type pos = string
 type line = pos
 var i : pos = "xiomara"
+
+/* var i pos = "xio" 
