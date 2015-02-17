@@ -7,5 +7,6 @@ var l : pos = "xiomara \" marie"
 var m : pos = "xiomara\ 
 				\marie"
 var n : pos = "xiomara \t \t \t marie"
+var p : pos = "xiomara \^c marie"
 
-/* var i pos = "xio" /* "mara" */ */
+/* var i pos = "xio" /* "mara"  */
