@@ -1,5 +1,5 @@
 type pos = string
 type line = pos
-var i : pos = "xiomara \z marie"
+var i : pos = "xiomara \n marie"
 
 /* var i pos = "xio" 

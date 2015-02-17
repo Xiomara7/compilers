@@ -813,7 +813,7 @@ let fun continue() = lex() in
 | 130 => (Tokens.FUNCTION(yypos,yypos+8))
 | 135 => let val yytext=yymktext() in Tokens.ID(yytext, yypos, yypos+size(yytext)) end
 | 138 => let val yytext=yymktext() in Tokens.INT(valOf (Int.fromString(yytext)),yypos,yypos+size(yytext)) end
-| 140 => (YYBEGIN STRING; strPos := yypos; uncloseStr := true; continue())
+| 140 => (YYBEGIN STRING; str := ""; strPos := yypos; uncloseStr := true; continue())
 | 142 => (YYBEGIN INITIAL; uncloseStr := false; Tokens.STRING(!str, !strPos, yypos+1))
 | 15 => (Tokens.RBRACK(yypos,yypos+1))
 | 153 => let val yytext=yymktext() in str := !str ^ valOf(String.fromString yytext); continue() end

@@ -70,7 +70,7 @@ letter = [A-Za-z];
 <INITIAL>{letter}({letter}|_|{digit})* => (Tokens.ID(yytext, yypos, yypos+size(yytext)));
 <INITIAL>{digit}+=> (Tokens.INT(valOf (Int.fromString(yytext)),yypos,yypos+size(yytext)));
 
-<INITIAL>\"		=> (YYBEGIN STRING; strPos := yypos; uncloseStr := true; continue());
+<INITIAL>"\""	=> (YYBEGIN STRING; str := ""; strPos := yypos; uncloseStr := true; continue());
 <STRING>\"    	=> (YYBEGIN INITIAL; uncloseStr := false; Tokens.STRING(!str, !strPos, yypos+1));
 <STRING>\\(n|t|\^c|[0-9]{3}|\"|\\)	=> (str := !str ^ valOf(String.fromString yytext); continue());
 <STRING>[\\]   	=> (YYBEGIN ESCAPE; continue());
