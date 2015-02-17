@@ -14,7 +14,9 @@ fun err(p1,p2) = ErrorMsg.error p1
 fun eof() = let val pos = hd(!linePos) in 
 	if !commentCount > 0 
 		then (ErrorMsg.error pos ("unclosed comments "); commentCount := 0; Tokens.EOF(pos,pos))
-	else Tokens.EOF(pos,pos) end
+	else if !uncloseStr = true
+		then (ErrorMsg.error pos ("unclosed string"); Tokens.EOF(pos,pos))
+	else (Tokens.EOF(pos,pos)) end
 
 %% 
 %s STRING; 
