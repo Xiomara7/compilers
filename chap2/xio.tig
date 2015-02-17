@@ -1,5 +1,11 @@
 type pos = string
 type line = pos
 var i : pos = "xiomara \n marie"
+var j : pos = "xiomara 1.895 marie"
+var l : pos = "xiomara \\ marie"
+var l : pos = "xiomara \" marie"
+var m : pos = "xiomara\ 
+				\marie"
+var n : pos = "xiomara \t \t \t marie"
 
-/* var i pos = "xio" 
+/* var i pos = "xio" /* "mara" */ */

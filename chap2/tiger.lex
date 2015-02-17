@@ -70,16 +70,16 @@ letter = [A-Za-z];
 <INITIAL>{letter}({letter}|_|{digit})* => (Tokens.ID(yytext, yypos, yypos+size(yytext)));
 <INITIAL>{digit}+=> (Tokens.INT(valOf (Int.fromString(yytext)),yypos,yypos+size(yytext)));
 
-<INITIAL>"\""	=> (YYBEGIN STRING; str := ""; strPos := yypos; uncloseStr := true; continue());
-<STRING>\"    	=> (YYBEGIN INITIAL; uncloseStr := false; Tokens.STRING(!str, !strPos, yypos+1));
+<INITIAL>"\""		=> (YYBEGIN STRING; str := ""; strPos := yypos; uncloseStr := true; continue());
+<STRING>\"    		=> (YYBEGIN INITIAL; uncloseStr := false; Tokens.STRING(!str, !strPos, yypos+1));
 <STRING>\\(n|t|\^c|[0-9]{3}|\"|\\)	=> (str := !str ^ valOf(String.fromString yytext); continue());
-<STRING>[\\]   	=> (YYBEGIN ESCAPE; continue());
-<ESCAPE>[\n]  	=> (lineNum := !lineNum+1; linePos := yypos+1 :: !linePos; continue());
-<ESCAPE>[\ \t\f]=> (continue()); 
-<ESCAPE>[\\]	=> (YYBEGIN STRING; continue());
-<ESCAPE>.    	=> (ErrorMsg.error yypos ("Illegal escape character: " ^ yytext); YYBEGIN STRING; continue());
-<STRING>[\n] 	=> (lineNum := !lineNum+1; linePos := yypos+1 :: !linePos; ErrorMsg.error yypos ("illegal linebreak in string literal "); continue());
-<STRING>.      	=> (str := !str ^ yytext; continue());
+<STRING>[\\]   		=> (YYBEGIN ESCAPE; continue());
+<ESCAPE>[\n]  		=> (lineNum := !lineNum+1; linePos := yypos+1 :: !linePos; continue());
+<ESCAPE>[\ \t\n\f]	=> (continue()); 
+<ESCAPE>[\\]		=> (YYBEGIN STRING; continue());
+<ESCAPE>.    		=> (ErrorMsg.error yypos ("Illegal escape character: " ^ yytext); YYBEGIN STRING; continue());
+<STRING>[\n] 		=> (lineNum := !lineNum+1; linePos := yypos+1 :: !linePos; ErrorMsg.error yypos ("illegal linebreak in string literal "); continue());
+<STRING>.      		=> (str := !str ^ yytext; continue());
 
 <INITIAL>"/*" 	=> (YYBEGIN COMMENT; commentCount := !commentCount+1; continue()); 
 <COMMENT>"/*" 	=> (commentCount := !commentCount + 1; continue()); 

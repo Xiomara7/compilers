@@ -756,7 +756,7 @@ in Vector.fromList(List.map g
 {fin = [(N 163)], trans = 0},
 {fin = [(N 159),(N 163)], trans = 0},
 {fin = [(N 161),(N 163)], trans = 0},
-{fin = [(N 157)], trans = 0}])
+{fin = [(N 157),(N 159)], trans = 0}])
 end
 structure StartStates =
 	struct
