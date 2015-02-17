@@ -2,7 +2,7 @@ The reserved words of the language are:
 ..*		while, for, to, break, let, in, end, function, var, type, array, if, then, else, do, of, nil.
 
 The punctuation symbols used in the language are: 
-..* 	, : ; ( ) [ ] { } . + - * / = <> < <+ >+ & | :=
+1. , : ; ( ) [ ] { } . + - * / = <> < <+ >+ & | :=
 
 The string value that I'm returning for a string literal have the following escape sequences translated into their meanings. 
 
