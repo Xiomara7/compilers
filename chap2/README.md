@@ -12,10 +12,10 @@ The string value that I'm returning for a string literal have the following esca
 
 __escapes__
 
-\n   => newline
-\t   => tab
-\ddd => where ddd is a 3 diggit decimal escape
-\^c  => 
+1. \n   => newline
+2. \t   => tab
+3. \ddd => where ddd is a 3 diggit decimal escape
+4. \^c  => 
 
 __comments__
 
