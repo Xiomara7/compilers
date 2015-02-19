@@ -19,11 +19,11 @@ __escapes__
 
 __comments__
 
-To detect unclosed comments (at the end of file) I'm using a variable to count how many comments are open and if they have their corresponding close set of characters (+1 when I see a [/*] and -1 if it is a [*/]). If the variable (commentCount) is greater than zero means there's an unclosed comment.
+To detect unclosed comments (at the end of file) I'm using a variable to count how many comments are open and if they have their corresponding close set of characters (+1 when I see a __[/*]__ and -1 if it is a __[*/]__). If the variable __commentCount__ is greater than zero means there's an unclosed comment.
 
 __strings__
 
-I totally underestimate this homework, specifically strings. I'm using a boolean variable (uncloseStr) and I initialize it to **true** when I find a ["] indicating a open string and move it to another state <STRING>. If I find another ["] inside the <STRING> state means I have to set (uncloseStr) to **false** .
+I totally underestimate this homework, specifically strings. I'm using a boolean variable __uncloseStr__ and I initialize it to **true** when I find a ["] indicating a open string and move it to another state <STRING>. If I find another ["] inside the <STRING> state means I have to set __uncloseStr__ to **false** .
 
 To manage escapes in strings I created another state <ESCAPE>. If there's a valid escape I append it to the initial string and move it to the <ESCAPE> state. In this state <ESCAPE> I check them indicidually and to the appropiate for each of them. 
 
