@@ -70,7 +70,7 @@ letter = [A-Za-z];
 <INITIAL>function  	=> (Tokens.FUNCTION(yypos,yypos+8));
 
 <INITIAL>{letter}({letter}|_|{digit})* => (Tokens.ID(yytext, yypos, yypos+size(yytext)));
-<INITIAL>{digit}+=> (Tokens.INT(valOf (Int.fromString(yytext)),yypos,yypos+size(yytext)));
+<INITIAL>[-]?{digit}+=> (Tokens.INT(valOf (Int.fromString(yytext)),yypos,yypos+size(yytext)));
 
 <INITIAL>"\""		=> (YYBEGIN STRING; str := ""; strPos := yypos; uncloseStr := true; continue());
 <STRING>\"    		=> (YYBEGIN INITIAL; uncloseStr := false; Tokens.STRING(!str, !strPos, yypos+1));
@@ -89,7 +89,7 @@ letter = [A-Za-z];
 <COMMENT>[\n] 	=> (lineNum := !lineNum+1; linePos := yypos+1 :: !linePos; continue());
 <COMMENT>. 		=> (continue()) ;
 
-<INITIAL>.       => (ErrorMsg.error yypos ("illegal character " ^ yytext); continue());
+<INITIAL>.      => (ErrorMsg.error yypos ("illegal character " ^ yytext); continue());
 
 
 
